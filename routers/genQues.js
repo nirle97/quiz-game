@@ -3,15 +3,15 @@ const genQues = Router();
 const path = require("path");
 const { questionTemplate } = require("../models/");
 const { Sequelize, Op } = require("sequelize");
-const { getRandomInt, type1Quest } = require("../utils");
+const { getRandomId, QuestionBuilder } = require("../utils");
 
 genQues.get("/", async (req, res) => {
-  let randomPick = getRandomInt(19);
+  let randomId = getRandomId(19);
   const template = await questionTemplate.findOne({
     attributes: ["id", "type", "question", "relevant_coloumn", "desc"],
-    where: { id: randomPick },
+    where: { id: randomId },
   });
-  type1Quest(template);
+  QuestionBuilder(template);
   res.send(template);
 });
 

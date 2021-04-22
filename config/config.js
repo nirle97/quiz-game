@@ -10,6 +10,7 @@ module.exports = {
       underscore: true,
     },
     logging: false,
+    dialectOptions: { decimalNumbers: true },
   },
   test: {
     username: "root",
