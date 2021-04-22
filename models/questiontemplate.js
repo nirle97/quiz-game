@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "questionTemplate",
       tableName: "questions_templates",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
     }
   );
   return questionTemplate;

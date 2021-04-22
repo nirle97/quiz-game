@@ -3,7 +3,7 @@ const genQues = Router();
 const path = require("path");
 const { questionTemplate } = require("../models/");
 const { Sequelize, Op } = require("sequelize");
-const { getRandomId, QuestionBuilder } = require("../utils");
+const { getRandomId, QuestionBuilder } = require("../utils/utils-genQues");
 
 genQues.get("/", async (req, res) => {
   let randomId = getRandomId(19);
@@ -12,7 +12,7 @@ genQues.get("/", async (req, res) => {
     where: { id: randomId },
   });
   QuestionBuilder(template);
-  res.send(template);
+  res.send(template).status(200);
 });
 
 module.exports = genQues;

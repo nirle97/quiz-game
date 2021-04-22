@@ -1,5 +1,5 @@
 const { Sequelize, Op, REAL } = require("sequelize");
-const { countryQuiz } = require("./models/");
+const { countryQuiz } = require("../models");
 
 const getRandomId = (max) => {
   return Math.floor(Math.random() * max) + 1;
@@ -95,16 +95,5 @@ const type3Quest = async (relevant_coloumn, countryNamesArray, orderMethod) => {
   if (answer[0].toJSON().Country === countryNamesArray[0]) return "true";
   return "false";
 };
-function weightedRandom(spec) {
-  //{ 0: 0.8, 1: 0.1, 2: 0.1 }
-  let i,
-    j,
-    table = [];
-  for (i in spec) {
-    for (j = 0; j < spec[i] * 10; j++) {
-      table.push(i);
-    }
-  }
-  return table[Math.floor(Math.random() * table.length)];
-}
-module.exports = { getRandomId, QuestionBuilder, weightedRandom };
+
+module.exports = { getRandomId, QuestionBuilder };
