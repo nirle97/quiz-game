@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
+const genQues = require("./routers/genQues");
 app.use(express.json());
 app.use(cors());
 require("dotenv").config();
@@ -10,8 +11,9 @@ require("dotenv").config();
 //     response.sendFile((path.join(__dirname, 'client', 'bulid')))
 //   })
 
-const PORT = process.env.PORT || 3001;
+app.use("/gen-quest", genQues);
 
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`app listening on ${PORT}`);
 });

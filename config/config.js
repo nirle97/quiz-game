@@ -9,6 +9,7 @@ module.exports = {
     define: {
       underscore: true,
     },
+    logging: false,
   },
   test: {
     username: "root",

@@ -31,13 +31,13 @@ module.exports = {
         type: 1,
         question: "Which country is the most densely populated?",
         desc: true,
-        relevant_coloumn: "Density_popkm22",
+        relevant_coloumn: "Density_popkm2",
       },
       {
         type: 1,
         question: "Which country is the least  densely populated?",
         desc: false,
-        relevant_coloumn: "Density_popkm22",
+        relevant_coloumn: "Density_popkm2",
       },
       {
         type: 1,

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       question: DataTypes.STRING,
       relevant_coloumn: DataTypes.STRING,
-      desc: DataTypes.Boolean,
+      desc: DataTypes.BOOLEAN,
     },
     {
       sequelize,
