@@ -5,6 +5,8 @@ const cors = require("cors");
 const genQues = require("./routers/genQues");
 const savedQues = require("./routers/savedQues");
 const score = require("./routers/score");
+const rate = require("./routers/rate");
+const newPlayer = require("./routers/newPlayer");
 app.use(express.json());
 app.use(cors());
 require("dotenv").config();
@@ -15,7 +17,9 @@ require("dotenv").config();
 
 app.use("/gen-quest", genQues);
 app.use("/score", score);
-app.use("/saved-question", savedQues);
+app.use("/saved-quest", savedQues);
+app.use("/add-player", newPlayer);
+app.use("/rate-quest", rate);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
