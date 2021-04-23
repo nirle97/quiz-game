@@ -21,15 +21,18 @@ savedQues.get("/", async (req, res) => {
 savedQues.post("/", async (req, res) => {
   const quesToSave = req.body;
   try {
-    await question.create({
-      question_template_id: quesToSave.question_template_id,
-      country_1: quesToSave.country_1,
-      country_2: quesToSave.country_2,
-      answer: quesToSave.answer,
-      option_1: quesToSave.option_1,
-      option_2: quesToSave.option_2,
-      option_3: quesToSave.option_3,
-    });
+    if (!quesToSave.is_saved) {
+      await question.create({
+        question_template_id: quesToSave.question_template_id,
+        country_1: quesToSave.country_1,
+        country_2: quesToSave.country_2,
+        answer: quesToSave.answer,
+        option_1: quesToSave.option_1,
+        option_2: quesToSave.option_2,
+        option_3: quesToSave.option_3,
+        is_saved: true,
+      });
+    }
     let quesToRate = await question.findOne({
       attributes: ["id"],
       where: {

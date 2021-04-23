@@ -43,6 +43,7 @@ const QuestionBuilder = async ({
     option_1: null,
     option_2: null,
     option_3: null,
+    is_saved: false,
   };
   switch (
     type // מילוי האובייקט לפי הטייפ

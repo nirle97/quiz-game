@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       option_1: DataTypes.STRING(30),
       option_2: DataTypes.STRING(30),
       option_3: DataTypes.STRING(30),
+      is_saved: DataTypes.BOOLEAN,
     },
     {
       sequelize,
