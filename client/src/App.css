@@ -42,3 +42,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: #cd5c5c;
+}
+.board-outside-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+}
+.board-inside-div {
+  width: 60%;
+  height: 70vh;
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: #f0e68c;
+  position: relative;
+}
+.title {
+  text-align: center;
+  margin-top: 1rem;
+}
