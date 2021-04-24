@@ -1,11 +1,13 @@
 import React, { useRef, useContext, useState } from "react";
-import { PlayerContext } from "../App";
+import { AppContext } from "../AppContext";
 import "../styles/lobby.css";
 const axios = require("axios");
 
 function Lobby({ history }) {
   const playerName = useRef(null);
-  const [userName, setUserName] = useContext(PlayerContext);
+  const { name, id } = useContext(AppContext);
+  const [userName, setUserName] = name;
+  const [userId, setUserId] = id;
   const [loginError, setLoginError] = useState("");
 
   //functions
@@ -15,9 +17,10 @@ function Lobby({ history }) {
       return;
     }
     setUserName(playerName.current);
-    await axios.post("/add-player", {
+    const playerId = await axios.post("/add-player", {
       name: playerName.current,
     });
+    setUserId(playerId);
     history.push("/game");
   }
 

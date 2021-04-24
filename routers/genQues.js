@@ -12,8 +12,10 @@ genQues.get("/", async (req, res) => {
       where: { id: randomId },
     });
     const newQuestion = await QuestionBuilder(template);
+
     res.send(newQuestion).status(200);
   } catch (e) {
+    console.log(e);
     res.send({ error: "could not generate a new question" }).status(500);
   }
 });

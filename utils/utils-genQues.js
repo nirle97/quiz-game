@@ -15,16 +15,14 @@ const QuestionBuilder = async ({
   const orderMethod = desc ? "DESC" : "ASC";
   const optionArray = [];
   let i = 0;
-  if (type === 3) i = 2; // מקרה קצה לטייפ 3 שימצא לי רק 2 תשובות ולא 4
+  if (type === 3) i = 2;
   while (i < 4) {
-    //  מציאת 4 תשובות אפשריות
     let randomId = getRandomId(243);
     let option = await countryQuiz.findOne({
       attributes: ["Country", relevant_coloumn],
       where: { id: randomId },
     });
     if (
-      // מוודא שאין NULL ושאין תשובות חוזרות
       !Object.values(option.toJSON()).includes(null) &&
       !optionArray.includes(option.toJSON())
     ) {
@@ -34,7 +32,6 @@ const QuestionBuilder = async ({
   }
   const countryNamesArray = optionArray.map((optionObj) => optionObj.Country);
   const questionObj = {
-    // question  האובייקט שמרכבי את השאלה זה מה שיחזור לקליינט וזה מה שבסוף יישמר ב טבלה של ה
     question_template_id: id,
     question: question,
     country_1: null,
@@ -45,9 +42,7 @@ const QuestionBuilder = async ({
     option_3: null,
     is_saved: false,
   };
-  switch (
-    type // מילוי האובייקט לפי הטייפ
-  ) {
+  switch (type) {
     case 1:
       questionObj.answer = await type1Quest(
         relevant_coloumn,
@@ -69,6 +64,7 @@ const QuestionBuilder = async ({
       questionObj.option_1 = optionArray[1][`${relevant_coloumn}`];
       questionObj.option_2 = optionArray[2][`${relevant_coloumn}`];
       questionObj.option_3 = optionArray[3][`${relevant_coloumn}`];
+      arrangeQuestString(questionObj);
       return questionObj;
     case 3:
       questionObj.country_1 = optionArray[0].Country;
@@ -80,7 +76,8 @@ const QuestionBuilder = async ({
       ))
         ? "true"
         : "false";
-      questionObj.Option_1 = questionObj.Answer === "true" ? "false" : "true";
+      questionObj.option_1 = questionObj.answer === "true" ? "false" : "true";
+      arrangeQuestString(questionObj);
       return questionObj;
   }
 };
@@ -104,5 +101,14 @@ const type3Quest = async (relevant_coloumn, countryNamesArray, orderMethod) => {
   if (answer[0].toJSON().Country === countryNamesArray[0]) return true;
   return false;
 };
+
+function arrangeQuestString(questObj) {
+  if (questObj.question.includes("Y")) {
+    questObj.question = questObj.question.replace("Y", questObj.country_2);
+  }
+  if (questObj.question.includes("X")) {
+    questObj.question = questObj.question.replace("X", questObj.country_1);
+  }
+}
 
 module.exports = { getRandomId, QuestionBuilder };

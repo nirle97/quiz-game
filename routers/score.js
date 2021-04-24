@@ -23,9 +23,9 @@ score.get("/", async (req, res) => {
   }
 });
 
-score.put("/:name/add-score", async (req, res) => {
+score.put("/:id/add-score", async (req, res) => {
   try {
-    player.increment("score", { by: 100, where: { name: req.params.name } });
+    player.increment("score", { by: 100, where: { id: req.params.id } });
     res.send("player's score updated").status(200);
   } catch (e) {
     res.send({ error: "could not increment score" }).status(500);

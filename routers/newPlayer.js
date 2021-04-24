@@ -9,7 +9,10 @@ newPlayer.post("/", async (req, res) => {
       name: req.body.name,
       score: 0,
     });
-    res.send("player succssufuly added").status(200);
+    const newPlayerId = await player.findOne({
+      order: [["created_at", "DESC"]],
+    });
+    res.send({ playerId: newPlayerId.toJSON() }).status(200);
   } catch (e) {
     res.status(500).send({ error: "could not add new player" });
   }

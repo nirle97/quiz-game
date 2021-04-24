@@ -19,7 +19,8 @@ savedQues.get("/", async (req, res) => {
 });
 
 savedQues.post("/", async (req, res) => {
-  const quesToSave = req.body;
+  const quesToSave = req.body.questObj;
+  console.log(req.body);
   try {
     if (!quesToSave.is_saved) {
       await question.create({

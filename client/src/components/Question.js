@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/question.css";
 
-function Question({ questObj }) {
-  //functions
-  const questStr = questObj.questionTemplate.question;
-  if (questStr.includes(" Y")) {
-    questStr = questStr.replace("Y", questObj.country_2);
-  }
-  if (questStr.includes(" X")) {
-    questStr = questStr.replace("X", questObj.country_1);
-  }
+function Question({ questObj, finsihRound }) {
+  const [optionsArray, setOptionsArray] = useState([]);
+  const [lastAnswer, setLastAnswer] = useState(null);
+  const playerAnswer = useRef(false);
 
+  function shuffleArray(array) {
+    if (array[2] === null) {
+      array.splice(2, 1);
+    }
+    if (array[3] === null) {
+      array.splice(3, 1);
+    }
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
   function clickAnswer(e) {
-    questionAnswer.current = e.target.innerText;
+    setLastAnswer(e.target.innerText);
+    if (questObj.answer === lastAnswer) {
+      playerAnswer.current = true;
+    } else {
+      playerAnswer.current = false;
+    }
   }
   const optionsArr = [
     questObj.answer,
@@ -20,34 +33,33 @@ function Question({ questObj }) {
     questObj.option_2,
     questObj.option_3,
   ];
-  if (optionsArr[2] === null) {
-    optionsArr.splice(2, 1);
-  }
-  if (optionsArr[3] === null) {
-    optionsArr.splice(3, 1);
-  }
-  function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
+  useEffect(() => {
+    setOptionsArray(shuffleArray(optionsArr));
+  }, []);
+  // useEffect(() => {
+  //   if(playerAnswer){
+  //     // next page
+  //   }
+  // }, [playerAnswer]);
+
   return (
     <div className="question-container">
-      <div className="question">{questStr}</div>
+      <div className="question">{questObj.question}</div>
       <div className="question-answers-container">
-        <div className="two-questions">
-          <span onClick={(e) => clickAnswer(e)}>{optionsArr[0]}</span>
-          <span onClick={(e) => clickAnswer(e)}>{optionsArr[1]}</span>
-        </div>
-        {questObj}
-        <div className="two-questions">
-          <span onClick={(e) => clickAnswer(e)}>{Answer3}</span>
-          <span onClick={(e) => clickAnswer(e)}>{Answer4}</span>
-        </div>
+        <ol className="two-questions">
+          <li onClick={(e) => clickAnswer(e)}>{optionsArr[0]}</li>
+          <li onClick={(e) => clickAnswer(e)}>{optionsArr[1]}</li>
+          {optionsArray.length > 2 && (
+            <>
+              <li onClick={(e) => clickAnswer(e)}>{optionsArr[2]}</li>
+              <li onClick={(e) => clickAnswer(e)}>{optionsArr[3]}</li>
+            </>
+          )}
+        </ol>
       </div>
-      <button onClick={() => submitFunc()}>Submit</button>
+      <button onClick={() => lastAnswer && finsihRound(playerAnswer.current)}>
+        Submit
+      </button>
     </div>
   );
 }
