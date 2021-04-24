@@ -10,8 +10,8 @@ function Question({ questObj, finsihRound }) {
     if (array[2] === null) {
       array.splice(2, 1);
     }
-    if (array[3] === null) {
-      array.splice(3, 1);
+    if (array[2] === null) {
+      array.splice(2, 1);
     }
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -27,32 +27,29 @@ function Question({ questObj, finsihRound }) {
       playerAnswer.current = false;
     }
   }
-  const optionsArr = [
-    questObj.answer,
-    questObj.option_1,
-    questObj.option_2,
-    questObj.option_3,
-  ];
   useEffect(() => {
-    setOptionsArray(shuffleArray(optionsArr));
-  }, []);
-  // useEffect(() => {
-  //   if(playerAnswer){
-  //     // next page
-  //   }
-  // }, [playerAnswer]);
+    const optionsArr = [
+      questObj.answer,
+      questObj.option_1,
+      questObj.option_2,
+      questObj.option_3,
+    ];
+    const shuffledOpt = shuffleArray(optionsArr);
+    console.log(shuffledOpt);
+    setOptionsArray([...shuffledOpt]);
+  }, [questObj]);
 
   return (
     <div className="question-container">
-      <div className="question">{questObj.question}</div>
+      <div className="question-title">{questObj.question}</div>
       <div className="question-answers-container">
-        <ol className="two-questions">
-          <li onClick={(e) => clickAnswer(e)}>{optionsArr[0]}</li>
-          <li onClick={(e) => clickAnswer(e)}>{optionsArr[1]}</li>
-          {optionsArray.length > 2 && (
+        <ol className="options">
+          <li onClick={(e) => clickAnswer(e)}>{optionsArray[0]}</li>
+          <li onClick={(e) => clickAnswer(e)}>{optionsArray[1]}</li>
+          {questObj.option_2 !== null && (
             <>
-              <li onClick={(e) => clickAnswer(e)}>{optionsArr[2]}</li>
-              <li onClick={(e) => clickAnswer(e)}>{optionsArr[3]}</li>
+              <li onClick={(e) => clickAnswer(e)}>{optionsArray[2]}</li>
+              <li onClick={(e) => clickAnswer(e)}>{optionsArray[3]}</li>
             </>
           )}
         </ol>

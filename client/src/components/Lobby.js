@@ -30,7 +30,7 @@ function Lobby({ history }) {
 
   return (
     <>
-      <div className="input-and-start-button-div">
+      <div className="lobby-container">
         <input
           type="text"
           placeholder="What is your name?"

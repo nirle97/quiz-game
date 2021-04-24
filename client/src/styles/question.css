@@ -1,14 +1,15 @@
 .question-container {
   border: 1px solid black;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
+  top: 40%;
+  width: auto;
+  height: auto;
 }
 
 .two-questions {
   display: flex;
   justify-content: space-around;
-}
-span {
-  width: 50px;
 }

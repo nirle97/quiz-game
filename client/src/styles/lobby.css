@@ -1,7 +1,11 @@
+.lobby-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  top: 40%;
+}
 .score-board {
   position: absolute;
-  bottom: 10%;
-  right: 5%;
-}
-.input-and-start-button-div {
+  top: 50%;
 }

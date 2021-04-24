@@ -1,0 +1,21 @@
+.game-container {
+  position: absolute;
+  display: flex;
+  top: 30%;
+  justify-content: center;
+  justify-items: center;
+}
+.user-name {
+  position: absolute;
+  display: flex;
+  top: 10%;
+  justify-content: center;
+  justify-items: center;
+}
+.back-to-lobby {
+  position: absolute;
+  display: flex;
+  top: 15%;
+  justify-content: center;
+  justify-items: center;
+}

@@ -48,21 +48,26 @@ function Game({ history }) {
     }
   };
 
+  const nextQuest = () => {
+    setQuestNumber((prev) => prev + 1);
+    setShowRating(false);
+  };
+
   return (
     <>
-      <div>
-        <h1>{userName}</h1>
-        <Question questObj={questObj} finsihRound={finsihRound} />
-        <button onClick={() => history.push("/")}>Back to Lobby</button>
-      </div>
+      <h1 className="user-name">{userName}</h1>
+      <Question questObj={questObj} finsihRound={finsihRound} />
+      <button className="back-to-lobby" onClick={() => history.push("/")}>
+        Back to Lobby
+      </button>
       {showRating && (
-        <div>
+        <div className="">
           <h2>
             {" "}
             Please rate this question and press the "Next question" button below
           </h2>
           <Rater total={5} onRate={(rating) => rateQuestion(rating.rating)} />
-          {/* <button onClick={() => setQuestNumber((prev) => prev + 1)}>Next question</button> */}
+          <button onClick={nextQuest}>Next question</button>
         </div>
       )}
     </>
