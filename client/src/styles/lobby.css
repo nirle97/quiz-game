@@ -1,11 +1,60 @@
 .lobby-container {
+  background-image: url("../question-mark-background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   position: absolute;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  top: 40%;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+input {
+  position: absolute;
+  top: 30%;
+  right: 25%;
+  width: 40%;
+  height: 50px;
+}
+.btn-outline-secondary {
+  position: absolute;
+  background-color: white;
+  font-size: 20px;
+  top: 30%;
+  right: 24%;
+  height: 50px;
 }
 .score-board {
   position: absolute;
   top: 50%;
+}
+.login-error {
+  position: absolute;
+  font-size: 20px;
+  top: 45%;
+  right: 45%;
+  height: 50px;
+  border: 2px dashed red;
+  padding: 8px;
+}
+
+.scoreboard-title {
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  font-size: 20px;
+  top: 55%;
+  right: 50%;
+}
+#lobby-arrow {
+  position: absolute;
+  transform: rotate(180deg);
+  border: none;
+}
+.score-board {
+  background-color: rgb(180, 165, 247);
+  color: black;
+  position: absolute;
+  font-size: 20px;
+  top: 55%;
+  right: 40%;
 }
