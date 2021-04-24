@@ -3,11 +3,12 @@ const score = Router();
 const { player } = require("../models");
 const { Sequelize } = require("sequelize");
 
-score.get("/:name", async (req, res) => {
+score.get("/get-player/:id", async (req, res) => {
   const user = await player.findOne({
-    where: { name: req.params.name },
+    where: { id: req.params.id },
   });
   if (!user) return res.send({ error: "no such user" }).status(400);
+  console.log(user.toJSON());
   res.send(user.toJSON()).status(200);
 });
 

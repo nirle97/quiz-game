@@ -4,18 +4,19 @@ import "../styles/game.css";
 import Question from "./Question";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
-// import Rater from "./Rater";
+
 const axios = require("axios");
 
 function Game({ history }) {
-  const { name, id } = useContext(AppContext);
+  const { name, id, live, click } = useContext(AppContext);
+  const [clicked, setClicked] = click;
   const [userName, setUserName] = name;
   const [userId, setUserId] = id;
+  const [lives, setLives] = live;
   const [showRating, setShowRating] = useState(false);
   const [questObj, setQuestObj] = useState({});
-  const [lives, setLives] = useState(3);
   const [questNumber, setQuestNumber] = useState(1);
-  // const [nextQuest, setNextQuest ] = useState(null)
+  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
 
   useEffect(async () => {
     if (questNumber % 3 === 0) {
@@ -27,10 +28,14 @@ function Game({ history }) {
     }
   }, [questNumber]);
 
+  useEffect(() => {
+    if (lives === "") {
+      history.push("/end-game");
+    }
+  }, [lives]);
+
   const ratePlayer = async (playerId) => {
-    await axios.put("/score/:id/add-score", {
-      id: playerId,
-    });
+    await axios.put(`/score/${userId}/add-score`);
   };
 
   const rateQuestion = async (rating) => {
@@ -40,15 +45,17 @@ function Game({ history }) {
   };
 
   const finsihRound = (playerAnswer) => {
+    console.log(playerAnswer);
     setShowRating(true);
     if (playerAnswer) {
       ratePlayer(userId);
     } else {
-      setLives((prev) => prev - 1);
+      setLives(lives.substring(0, lives.length - 2));
     }
   };
 
   const nextQuest = () => {
+    setClicked(false);
     setQuestNumber((prev) => prev + 1);
     setShowRating(false);
   };
@@ -61,17 +68,19 @@ function Game({ history }) {
         Back to Lobby
       </button>
       {showRating && (
-        <div className="">
-          <h2>
-            {" "}
-            Please rate this question and press the "Next question" button below
-          </h2>
-          <Rater total={5} onRate={(rating) => rateQuestion(rating.rating)} />
-          <button onClick={nextQuest}>Next question</button>
-        </div>
+        <>
+          <div className="rate-container">
+            <h2>
+              Please rate this question and press the "Next question" button
+              below
+            </h2>
+            <Rater total={5} onRate={(rating) => rateQuestion(rating.rating)} />
+            <button onClick={nextQuest}>Next question</button>
+          </div>
+        </>
       )}
+      <span>Lives Left: {lives}</span>
     </>
   );
 }
-// rating={} interactive={} onRate={{({rating}) => {}}} onRating={}
 export default Game;

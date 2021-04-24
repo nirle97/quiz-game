@@ -9,7 +9,12 @@
   height: auto;
 }
 
-.two-questions {
-  display: flex;
-  justify-content: space-around;
+.selected-option {
+  border: 1px dashed gray;
+}
+.correct-answer {
+  background-color: green;
+}
+.wrong-answer {
+  background-color: red;
 }

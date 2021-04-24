@@ -5,12 +5,12 @@ const axios = require("axios");
 
 function Lobby({ history }) {
   const playerName = useRef(null);
-  const { name, id } = useContext(AppContext);
+  const { name, id, live } = useContext(AppContext);
+  const [lives, setLives] = live;
   const [userName, setUserName] = name;
   const [userId, setUserId] = id;
   const [loginError, setLoginError] = useState("");
 
-  //functions
   async function startGame() {
     if (!playerName.current) {
       setLoginError("Cannot start the game with a blank name");
@@ -21,6 +21,7 @@ function Lobby({ history }) {
       name: playerName.current,
     });
     setUserId(playerId);
+    setLives("❤️❤️❤️");
     history.push("/game");
   }
 
@@ -31,6 +32,7 @@ function Lobby({ history }) {
   return (
     <>
       <div className="lobby-container">
+        <h1>QUIZ GAME</h1>
         <input
           type="text"
           placeholder="What is your name?"

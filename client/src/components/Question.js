@@ -1,10 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { AppContext } from "../AppContext";
 import "../styles/question.css";
+const axios = require("axios");
 
 function Question({ questObj, finsihRound }) {
   const [optionsArray, setOptionsArray] = useState([]);
-  const [lastAnswer, setLastAnswer] = useState(null);
-  const playerAnswer = useRef(false);
+  const playerAnswer = useRef(null);
+  const correctAnswer = useRef("option");
+  const { id, live, click } = useContext(AppContext);
+  const [userId, setUserId] = id;
+  const [lives, setLives] = live;
+  const [clicked, setClicked] = click;
 
   function shuffleArray(array) {
     if (array[2] === null) {
@@ -20,13 +26,10 @@ function Question({ questObj, finsihRound }) {
     return array;
   }
   function clickAnswer(e) {
-    setLastAnswer(e.target.innerText);
-    if (questObj.answer === lastAnswer) {
-      playerAnswer.current = true;
-    } else {
-      playerAnswer.current = false;
-    }
+    playerAnswer.current = e.target;
+    console.log(playerAnswer.current);
   }
+
   useEffect(() => {
     const optionsArr = [
       questObj.answer,
@@ -35,28 +38,50 @@ function Question({ questObj, finsihRound }) {
       questObj.option_3,
     ];
     const shuffledOpt = shuffleArray(optionsArr);
-    console.log(shuffledOpt);
     setOptionsArray([...shuffledOpt]);
   }, [questObj]);
+
+  const submitQuest = async () => {
+    setClicked(true);
+    if (playerAnswer.current.innerText === questObj.answer) {
+      finsihRound(true);
+      playerAnswer.current.setAttribute("class", "correct-answer");
+    } else {
+      const allInputs = document.querySelectorAll("label");
+      console.log(allInputs[0]);
+      allInputs.forEach((item) => {
+        if (item.innerText === questObj.answer) {
+          item.setAttribute("class", "correct-answer");
+        }
+      });
+      finsihRound(false);
+    }
+  };
 
   return (
     <div className="question-container">
       <div className="question-title">{questObj.question}</div>
-      <div className="question-answers-container">
-        <ol className="options">
-          <li onClick={(e) => clickAnswer(e)}>{optionsArray[0]}</li>
-          <li onClick={(e) => clickAnswer(e)}>{optionsArray[1]}</li>
-          {questObj.option_2 !== null && (
-            <>
-              <li onClick={(e) => clickAnswer(e)}>{optionsArray[2]}</li>
-              <li onClick={(e) => clickAnswer(e)}>{optionsArray[3]}</li>
-            </>
-          )}
-        </ol>
+      <div
+        className="question-answers-container"
+        onChange={(e) => clickAnswer(e)}
+      >
+        <input type="radio" name="option" value={optionsArray[0]} />
+        <label for={optionsArray[0]}>{optionsArray[0]}</label>
+        <br />
+        <input type="radio" name="option" value={optionsArray[1]} />
+        <label for={optionsArray[1]}>{optionsArray[1]}</label>
+        <br />
+        {questObj.option_2 !== null && (
+          <>
+            <input type="radio" name="option" value={optionsArray[2]} />
+            <label for={optionsArray[2]}>{optionsArray[2]}</label>
+            <br />
+            <input type="radio" name="option" value={optionsArray[3]} />
+            <label for={optionsArray[3]}>{optionsArray[3]}</label>
+          </>
+        )}
       </div>
-      <button onClick={() => lastAnswer && finsihRound(playerAnswer.current)}>
-        Submit
-      </button>
+      {!clicked && <button onClick={submitQuest}>Submit</button>}
     </div>
   );
 }
