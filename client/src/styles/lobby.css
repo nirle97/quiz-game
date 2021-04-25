@@ -8,7 +8,7 @@
   width: 100vw;
   height: 100vh;
 }
-input {
+.form-control {
   position: absolute;
   top: 30%;
   right: 25%;
@@ -56,5 +56,5 @@ input {
   position: absolute;
   font-size: 20px;
   top: 55%;
-  right: 40%;
+  right: 37%;
 }

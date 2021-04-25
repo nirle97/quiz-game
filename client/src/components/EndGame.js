@@ -17,7 +17,7 @@ function EndGame({ history }) {
   return (
     <>
       <h1>Oh God You Lost</h1>
-      {/* <h2>You Made {playerScore} Score</h2> */}
+      {/* <h2>You Have {playerScore} Score</h2> */}
       <button onClick={() => history.push("/")}>Start Over</button>
     </>
   );

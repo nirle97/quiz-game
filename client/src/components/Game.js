@@ -17,6 +17,7 @@ function Game({ history }) {
   const [questObj, setQuestObj] = useState({});
   const [questNumber, setQuestNumber] = useState(1);
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
+  const [playerScore, setPlayerScore] = useState(0);
 
   useEffect(async () => {
     if (questNumber % 3 === 0) {
@@ -45,7 +46,6 @@ function Game({ history }) {
   };
 
   const finsihRound = (playerAnswer) => {
-    console.log(playerAnswer);
     setShowRating(true);
     if (playerAnswer) {
       ratePlayer(userId);
@@ -63,10 +63,15 @@ function Game({ history }) {
   return (
     <>
       <h1 className="user-name">{userName}</h1>
-      <Question questObj={questObj} finsihRound={finsihRound} />
-      <button className="back-to-lobby" onClick={() => history.push("/")}>
-        Back to Lobby
-      </button>
+      <span>Lives Left: {lives}</span>
+      <span>score: {playerScore}</span>
+      <div className="question-block">
+        <Question
+          questObj={questObj}
+          finsihRound={finsihRound}
+          history={history}
+        />
+      </div>
       {showRating && (
         <>
           <div className="rate-container">
@@ -79,7 +84,6 @@ function Game({ history }) {
           </div>
         </>
       )}
-      <span>Lives Left: {lives}</span>
     </>
   );
 }

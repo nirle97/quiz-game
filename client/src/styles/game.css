@@ -1,10 +1,3 @@
-.game-container {
-  position: absolute;
-  display: flex;
-  top: 30%;
-  justify-content: center;
-  justify-items: center;
-}
 .user-name {
   position: absolute;
   display: flex;
@@ -16,6 +9,21 @@
   position: absolute;
   display: flex;
   top: 15%;
+  justify-content: center;
+  justify-items: center;
+}
+.question-block {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  padding: 10px;
+}
+.rate-container {
+  position: absolute;
+  display: flex;
+  top: 60%;
   justify-content: center;
   justify-items: center;
 }

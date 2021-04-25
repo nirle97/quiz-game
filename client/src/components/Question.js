@@ -3,7 +3,7 @@ import { AppContext } from "../AppContext";
 import "../styles/question.css";
 const axios = require("axios");
 
-function Question({ questObj, finsihRound }) {
+function Question({ questObj, finsihRound, history }) {
   const [optionsArray, setOptionsArray] = useState([]);
   const playerAnswer = useRef(null);
   const correctAnswer = useRef("option");
@@ -60,6 +60,10 @@ function Question({ questObj, finsihRound }) {
 
   return (
     <div className="question-container">
+      <h1>Quiz Game!</h1>
+      <a onClick={() => history.push("/")}>
+        <i class="fas fa-arrow-left" id="arrow-in-game"></i>
+      </a>
       <div className="question-title">{questObj.question}</div>
       <div
         className="question-answers-container"
