@@ -1,9 +1,14 @@
-.user-name {
-  position: absolute;
+.quiz-game-title {
+  font-size: 60px;
   display: flex;
-  top: 10%;
-  justify-content: center;
-  justify-items: center;
+  justify-items: right;
+  justify-content: right;
+  margin-left: 15vw;
+}
+
+.user-name {
+  display: block;
+  float: left;
 }
 .back-to-lobby {
   position: absolute;
@@ -16,7 +21,8 @@
   position: absolute;
   display: block;
   height: 100%;
-  width: 100%;
+  width: 50%;
+  float: left;
   left: 0;
   padding: 10px;
 }
@@ -26,4 +32,17 @@
   top: 60%;
   justify-content: center;
   justify-items: center;
+}
+.game-panel {
+  position: absolute;
+  float: right;
+  top: 12%;
+  left: 60%;
+  font-size: 40px;
+}
+.game-panel span {
+  margin-left: 40px;
+}
+.rate-stars {
+  display: block;
 }

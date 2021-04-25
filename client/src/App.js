@@ -12,7 +12,6 @@ function App() {
     <ErrorBoundary>
       <AppProvider>
         <div className="container">
-          {/* <img class="ques-mark-img" src={backgroundImg} alt="?-background" /> */}
           <Switch>
             <Route path="/" exact component={Lobby} />
             <Route path="/game" render={(props) => <Game {...props} />} />

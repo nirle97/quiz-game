@@ -1,15 +1,18 @@
-/* .question-container {
-  border: 1px solid black;
-  position: absolute;
-  width: auto;
-  height: auto;
-  background-color: yellow;
-} */
 .question-title {
-  font-size: 25px;
+  font-size: 30px;
 }
 .question-answers-container {
-  font-size: 20px;
+  font-size: 40px;
+}
+
+.question-answers-container td {
+  font-size: 30px;
+  border-bottom: 1px solid gray;
+}
+
+#arrow-in-game {
+  float: left;
+  margin-right: 20px;
 }
 .selected-option {
   border: 1px dashed gray;
@@ -19,4 +22,9 @@
 }
 .wrong-answer {
   background-color: red;
+}
+.game-btn {
+  position: absolute;
+  top: 40%;
+  left: 2%;
 }

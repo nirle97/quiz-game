@@ -21,7 +21,7 @@ function Lobby({ history }) {
     const playerId = await axios.post("/add-player", {
       name: playerName.current,
     });
-    setUserId(playerId);
+    setUserId(playerId.data.playerId.id);
     setLives("❤️❤️❤️");
     history.push("/game");
   }

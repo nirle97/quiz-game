@@ -13,12 +13,12 @@ function ScoreBoard({ history }) {
   return (
     <div>
       <a onClick={() => history.push("/")}>
-        <i class="fas fa-arrow-left"></i>
+        <i className="fas fa-arrow-left"></i>
       </a>
       <h1>Score Board</h1>
 
       <div className="board-container">
-        <table className="table table-hover">
+        <table className="table table-hover" id="score-table">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>

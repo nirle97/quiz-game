@@ -27,7 +27,6 @@ function Question({ questObj, finsihRound, history }) {
   }
   function clickAnswer(e) {
     playerAnswer.current = e.target;
-    console.log(playerAnswer.current);
   }
 
   useEffect(() => {
@@ -37,18 +36,24 @@ function Question({ questObj, finsihRound, history }) {
       questObj.option_2,
       questObj.option_3,
     ];
+    console.log(questObj.answer);
     const shuffledOpt = shuffleArray(optionsArr);
     setOptionsArray([...shuffledOpt]);
+
+    let allInputs = document.querySelectorAll("label");
+    allInputs.forEach((item) => {
+      if (item.classList.contains("correct-answer")) {
+        item.classList.remove("correct-answer");
+      }
+    });
   }, [questObj]);
 
   const submitQuest = async () => {
-    setClicked(true);
-    if (playerAnswer.current.innerText === questObj.answer) {
+    if (playerAnswer.current.defaultValue === questObj.answer) {
       finsihRound(true);
-      playerAnswer.current.setAttribute("class", "correct-answer");
+      playerAnswer.current.labels[0].classList.add("correct-answer");
     } else {
       const allInputs = document.querySelectorAll("label");
-      console.log(allInputs[0]);
       allInputs.forEach((item) => {
         if (item.innerText === questObj.answer) {
           item.setAttribute("class", "correct-answer");
@@ -60,32 +65,76 @@ function Question({ questObj, finsihRound, history }) {
 
   return (
     <div className="question-container">
-      <h1>Quiz Game!</h1>
       <a onClick={() => history.push("/")}>
-        <i class="fas fa-arrow-left" id="arrow-in-game"></i>
+        <i className="fas fa-arrow-left" id="arrow-in-game"></i>
       </a>
-      <div className="question-title">{questObj.question}</div>
-      <div
-        className="question-answers-container"
+      <h2 className="question-title">{questObj.question}</h2>
+      <table
+        className="question-answers-container table table-hover"
         onChange={(e) => clickAnswer(e)}
       >
-        <input type="radio" name="option" value={optionsArray[0]} />
-        <label for={optionsArray[0]}>{optionsArray[0]}</label>
-        <br />
-        <input type="radio" name="option" value={optionsArray[1]} />
-        <label for={optionsArray[1]}>{optionsArray[1]}</label>
-        <br />
+        <tr>
+          <td>
+            <input
+              type="radio"
+              name="option"
+              id="option0"
+              value={optionsArray[0]}
+            />
+            <label htmlFor="option0">{optionsArray[0]}</label>
+            <br />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              type="radio"
+              name="option"
+              id="option1"
+              value={optionsArray[1]}
+            />
+            <label id="option1" htmlFor="option1">
+              {optionsArray[1]}
+            </label>
+            <br />
+          </td>
+        </tr>
         {questObj.option_2 !== null && (
           <>
-            <input type="radio" name="option" value={optionsArray[2]} />
-            <label for={optionsArray[2]}>{optionsArray[2]}</label>
-            <br />
-            <input type="radio" name="option" value={optionsArray[3]} />
-            <label for={optionsArray[3]}>{optionsArray[3]}</label>
+            <tr>
+              <td>
+                <input
+                  type="radio"
+                  name="option"
+                  id="option2"
+                  value={optionsArray[2]}
+                />
+                <label htmlFor="option2">{optionsArray[2]}</label>
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="radio"
+                  name="option"
+                  id="option3"
+                  value={optionsArray[3]}
+                />
+                <label htmlFor="option3">{optionsArray[3]}</label>
+              </td>
+            </tr>
           </>
         )}
-      </div>
-      {!clicked && <button onClick={submitQuest}>Submit</button>}
+      </table>
+      {
+        <button
+          className="btn btn-outline-secondary game-btn"
+          onClick={submitQuest}
+        >
+          Submit
+        </button>
+      }
     </div>
   );
 }
