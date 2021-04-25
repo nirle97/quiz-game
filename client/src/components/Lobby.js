@@ -36,12 +36,12 @@ function Lobby({ history }) {
         <h1>QUIZ GAME</h1>
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           placeholder="What is your name?"
           onChange={(e) => (playerName.current = e.target.value)}
         ></input>
         <button
-          class="btn btn-outline-secondary"
+          className="btn btn-outline-secondary"
           type="button"
           onClick={() => startGame()}
         >
@@ -50,7 +50,7 @@ function Lobby({ history }) {
         {loginError !== "" && <div className="login-error">{loginError}</div>}
         <a className="scoreboard-title" onClick={() => history.push("/")}>
           Click Here To See Other People Results!
-          <i class="fas fa-arrow-left" id="lobby-arrow"></i>
+          <i className="fas fa-arrow-left" id="lobby-arrow"></i>
         </a>
         <button
           className="btn btn-outline-secondary score-board"

@@ -11,7 +11,8 @@ const axios = require("axios");
 
 function Game({ history }) {
   const { name, id, live, click, currentScore } = useContext(AppContext);
-  const [clicked, setClicked] = click;
+  const clicked = click;
+  const isTimeRunning = useRef(true);
   const [userName, setUserName] = name;
   const [userId, setUserId] = id;
   const [lives, setLives] = live;
@@ -19,7 +20,6 @@ function Game({ history }) {
   const [showRating, setShowRating] = useState(false);
   const [questObj, setQuestObj] = useState({});
   const [questNumber, setQuestNumber] = useState(1);
-  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
 
   useEffect(async () => {
     if (questNumber % 3 === 0) {
@@ -64,7 +64,8 @@ function Game({ history }) {
   };
 
   const nextQuest = () => {
-    setClicked(false);
+    clicked.current.disabled = false;
+    isTimeRunning.current = true;
     setQuestNumber((prev) => prev + 1);
     setShowRating(false);
   };
@@ -75,10 +76,13 @@ function Game({ history }) {
       <div className="game-panel">
         <span>Lives Left: {lives}</span>
         <span>score: {playerScore}</span>
-        {/* <Countdown /> */}
+        <div className="clock">
+          <Countdown isTimeRunning={isTimeRunning} />
+        </div>
       </div>
       <div className="question-block">
         <Question
+          isTimeRunning={isTimeRunning}
           questObj={questObj}
           finsihRound={finsihRound}
           history={history}
@@ -87,7 +91,7 @@ function Game({ history }) {
       {showRating && (
         <>
           <div className="rate-container">
-            <h2>
+            <h2 className="rate-title">
               Please rate this question and press the "Next question" button
               below
             </h2>
@@ -97,7 +101,12 @@ function Game({ history }) {
                 onRate={(rating) => rateQuestion(rating.rating)}
               />
             </div>
-            <button onClick={nextQuest}>Next question</button>
+            <button
+              onClick={nextQuest}
+              className="btn btn-outline-secondary next-quest-btn"
+            >
+              Next Question
+            </button>
           </div>
         </>
       )}
