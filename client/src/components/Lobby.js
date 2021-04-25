@@ -1,8 +1,8 @@
-import React, { useRef, useContext, useState } from "react";
-import { AppContext } from "../AppContext";
-import "../styles/lobby.css";
-import questImage from "../question-mark-background.jpg";
-const axios = require("axios");
+import React, { useRef, useContext, useState } from 'react';
+import { AppContext } from '../AppContext';
+import '../styles/lobby.css';
+import questImage from '../question-mark-background.jpg';
+const axios = require('axios');
 
 function Lobby({ history }) {
   const playerName = useRef(null);
@@ -10,7 +10,7 @@ function Lobby({ history }) {
   const [lives, setLives] = live;
   const [userName, setUserName] = name;
   const [userId, setUserId] = id;
-  const [loginError, setLoginError] = useState("");
+  const [loginError, setLoginError] = useState('');
 
   async function startGame() {
     if (!playerName.current) {
@@ -18,46 +18,48 @@ function Lobby({ history }) {
       return;
     }
     setUserName(playerName.current);
-    const playerId = await axios.post("/add-player", {
+    const playerId = await axios.post('/add-player', {
       name: playerName.current,
     });
     setUserId(playerId.data.playerId.id);
-    setLives("❤️❤️❤️");
-    history.push("/game");
+    setLives('❤️❤️❤️');
+    history.push('/game');
   }
 
   function goToScoreBoard() {
-    history.push("/scoreboard");
+    history.push('/scoreboard');
   }
 
   return (
     <>
-      <div className="lobby-container input-group mb-3">
-        <h1>QUIZ GAME</h1>
+      <div className='lobby-container input-group mb-3'>
+        <h1 className='lobby-title'>QUIZ GAME</h1>
         <input
-          type="text"
-          class="form-control"
-          placeholder="What is your name?"
+          type='text'
+          className='player-input'
+          placeholder='What is your name?'
           onChange={(e) => (playerName.current = e.target.value)}
-        ></input>
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          onClick={() => startGame()}
-        >
-          Start Game
-        </button>
-        {loginError !== "" && <div className="login-error">{loginError}</div>}
-        <a className="scoreboard-title" onClick={() => history.push("/")}>
+        />
+        <div className='lobby-buttons'>
+          <button
+            class='btn btn-outline-secondary'
+            type='button'
+            onClick={() => startGame()}
+          >
+            Start Game
+          </button>
+          <button
+            className='btn btn-outline-secondary score-board'
+            onClick={() => goToScoreBoard()}
+          >
+            ScoreBoard
+          </button>
+        </div>
+        {loginError !== '' && <div className='login-error'>{loginError}</div>}
+        {/* <a className='scoreboard-title' onClick={() => history.push('/')}>
           Click Here To See Other People Results!
-          <i class="fas fa-arrow-left" id="lobby-arrow"></i>
-        </a>
-        <button
-          className="btn btn-outline-secondary score-board"
-          onClick={() => goToScoreBoard()}
-        >
-          ScoreBoard
-        </button>
+          <i class='fas fa-arrow-left' id='lobby-arrow'></i>
+        </a> */}
       </div>
     </>
   );

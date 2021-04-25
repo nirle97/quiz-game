@@ -4,6 +4,7 @@
   justify-items: right;
   justify-content: right;
   margin-left: 15vw;
+  margin-top: 1rem;
 }
 
 .user-name {
@@ -45,4 +46,16 @@
 }
 .rate-stars {
   display: block;
+}
+.endgame-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20vh;
+}
+.endgame-text {
+  font-size: 3rem;
+}
+.start-over-button {
+  font-size: 2rem;
 }
