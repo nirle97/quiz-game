@@ -1,18 +1,17 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
-import { AppContext } from '../AppContext';
-import '../styles/game.css';
-const axios = require('axios');
+import React, { useContext } from "react";
+import { AppContext } from "../AppContext";
+import "../styles/game.css";
 
 function EndGame({ history }) {
-  const { name, id, live, currentScore } = useContext(AppContext);
-  const [playerScore, setPlayerScore] = currentScore;
+  const { currentScore } = useContext(AppContext);
+  const [playerScore] = currentScore;
 
   return (
-    <div className='endgame-container'>
-      <h2 className='endgame-text'>You Made {playerScore} Points</h2>
-      <h2 className='endgame-text'>Thanks for playing </h2>
-      <h2 className='endgame-text'> And Good Luck Next Time !</h2>
-      <button className='start-over-button' onClick={() => history.push('/')}>
+    <div className="endgame-container">
+      <h2 className="endgame-text">You Made {playerScore} Points</h2>
+      <h2 className="endgame-text">Thanks for playing </h2>
+      <h2 className="endgame-text"> And Good Luck Next Time !</h2>
+      <button className="start-over-button" onClick={() => history.push("/")}>
         Start Over
       </button>
     </div>

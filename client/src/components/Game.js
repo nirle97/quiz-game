@@ -1,11 +1,10 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../AppContext";
 import "../styles/game.css";
 import Question from "./Question";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import Countdown from "./Countdown";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const axios = require("axios");
 
@@ -21,12 +20,12 @@ function Game({ history }) {
     isPause,
   } = useContext(AppContext);
   const clicked = click;
-  const [key, setKey] = timerKey;
-  const [isTimeRunning, setIsTimeRunning] = timerMode;
-  const [userName, setUserName] = name;
-  const [userId, setUserId] = id;
+  const [, setKey] = timerKey;
+  const [, setIsTimeRunning] = timerMode;
+  const [userName] = name;
+  const [userId] = id;
   const [lives, setLives] = live;
-  const [pause, setPause] = isPause;
+  const [, setPause] = isPause;
   const [playerScore, setPlayerScore] = currentScore;
   const [showRating, setShowRating] = useState(false);
   const [questObj, setQuestObj] = useState({});

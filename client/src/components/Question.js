@@ -1,15 +1,14 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { AppContext } from "../AppContext";
 import "../styles/question.css";
-const axios = require("axios");
 
 function Question({ questObj, finsihRound, history }) {
   const [optionsArray, setOptionsArray] = useState([]);
   const playerAnswer = useRef(null);
   const { click, timerMode, isPause } = useContext(AppContext);
   const clicked = click;
-  const [isTimeRunning, setIsTimeRunning] = timerMode;
-  const [pause, setPause] = isPause;
+  const [isTimeRunning] = timerMode;
+  const [, setPause] = isPause;
 
   useEffect(() => {
     if (isTimeRunning === false) {

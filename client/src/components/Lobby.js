@@ -3,15 +3,14 @@ import { AppContext } from "../AppContext";
 import "../styles/lobby.css";
 import Footer from "./Footer";
 
-import questImage from "../question-mark-background.jpg";
 const axios = require("axios");
 
 function Lobby({ history }) {
   const playerName = useRef(null);
   const { name, id, live } = useContext(AppContext);
-  const [lives, setLives] = live;
-  const [userName, setUserName] = name;
-  const [userId, setUserId] = id;
+  const [, setLives] = live;
+  const [, setUserName] = name;
+  const [, setUserId] = id;
   const [loginError, setLoginError] = useState("");
 
   async function startGame() {
