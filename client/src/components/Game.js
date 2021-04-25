@@ -18,6 +18,7 @@ function Game({ history }) {
     currentScore,
     timerMode,
     timerKey,
+    isPause,
   } = useContext(AppContext);
   const clicked = click;
   const [key, setKey] = timerKey;
@@ -25,6 +26,7 @@ function Game({ history }) {
   const [userName, setUserName] = name;
   const [userId, setUserId] = id;
   const [lives, setLives] = live;
+  const [pause, setPause] = isPause;
   const [playerScore, setPlayerScore] = currentScore;
   const [showRating, setShowRating] = useState(false);
   const [questObj, setQuestObj] = useState({});
@@ -73,6 +75,7 @@ function Game({ history }) {
   };
 
   const nextQuest = () => {
+    setPause(false);
     clicked.current.disabled = false;
     setIsTimeRunning(true);
     setKey((prevKey) => prevKey + 1);

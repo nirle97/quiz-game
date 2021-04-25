@@ -1,6 +1,8 @@
 import React, { useRef, useContext, useState } from "react";
 import { AppContext } from "../AppContext";
 import "../styles/lobby.css";
+import Footer from "./Footer";
+
 import questImage from "../question-mark-background.jpg";
 const axios = require("axios");
 
@@ -57,6 +59,7 @@ function Lobby({ history }) {
         </div>
         {loginError !== "" && <div className="login-error">{loginError}</div>}
       </div>
+      <Footer />
     </>
   );
 }

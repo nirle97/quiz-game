@@ -1,10 +1,20 @@
 .footer-inside-container {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
-  height: 20vh;
+  height: 10vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: rgba(174, 196, 245, 0.465);
+}
+.footer-inside-container h1 {
+  margin-top: 30px;
+}
+.footer-inside-container a {
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 25px;
+  color: black;
 }

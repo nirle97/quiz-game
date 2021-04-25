@@ -6,11 +6,6 @@
   padding: 0;
 }
 
-/* .title {
-  text-align: center;
-  margin-top: 1rem;
-} */
-
 body {
-  background-image: url('./810706_hd-light-blue-sparkle-lights-wallpapers-full-hd-full-size_2560x1600_h.jpg');
+  background-image: url("./810706_hd-light-blue-sparkle-lights-wallpapers-full-hd-full-size_2560x1600_h.jpg");
 }

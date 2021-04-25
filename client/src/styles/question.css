@@ -9,6 +9,9 @@
   font-size: 30px;
   border-bottom: 1px solid gray;
 }
+.question-answers-container td label {
+  margin-left: 10px;
+}
 
 #arrow-in-game {
   float: left;

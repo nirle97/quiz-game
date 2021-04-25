@@ -6,15 +6,13 @@ const axios = require("axios");
 function Question({ questObj, finsihRound, history }) {
   const [optionsArray, setOptionsArray] = useState([]);
   const playerAnswer = useRef(null);
-  const { click, timerMode } = useContext(AppContext);
+  const { click, timerMode, isPause } = useContext(AppContext);
   const clicked = click;
   const [isTimeRunning, setIsTimeRunning] = timerMode;
+  const [pause, setPause] = isPause;
 
   useEffect(() => {
-    console.log(`${isTimeRunning}- use effect`);
     if (isTimeRunning === false) {
-      console.log("useEffect-isTimeRunning-in-if");
-      console.log(isTimeRunning);
       submitQuest();
     }
   }, [isTimeRunning]);
@@ -55,6 +53,7 @@ function Question({ questObj, finsihRound, history }) {
   }, [questObj]);
 
   const submitQuest = () => {
+    setPause(true);
     clicked.current.disabled = true;
     if (isTimeRunning === true) {
       if (playerAnswer.current.defaultValue === questObj.answer) {

@@ -8,6 +8,7 @@ export const AppProvider = (props) => {
   const [lives, setLives] = useState("❤️❤️❤️");
   const clicked = useRef();
   const [key, setKey] = useState(0);
+  const [pause, setPause] = useState(false);
   const [playerScore, setPlayerScore] = useState(0);
   const [isTimeRunning, setIsTimeRunning] = useState(true);
 
@@ -21,6 +22,7 @@ export const AppProvider = (props) => {
         currentScore: [playerScore, setPlayerScore],
         timerMode: [isTimeRunning, setIsTimeRunning],
         timerKey: [key, setKey],
+        isPause: [pause, setPause],
       }}
     >
       {props.children}

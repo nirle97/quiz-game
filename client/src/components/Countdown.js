@@ -4,9 +4,10 @@ import "../styles/countdown.css";
 import { AppContext } from "../AppContext";
 
 function Countdown() {
-  const { timerMode, timerKey } = useContext(AppContext);
+  const { timerMode, timerKey, isPause } = useContext(AppContext);
   const [isTimeRunning, setIsTimeRunning] = timerMode;
   const [key, setKey] = timerKey;
+  const [pause, setPause] = isPause;
   const onFinish = (timeLeft) => {
     if (timeLeft === 0) {
       setIsTimeRunning(false);
@@ -16,8 +17,8 @@ function Countdown() {
     <CountdownCircleTimer
       onFinish={onFinish}
       key={key}
-      isPlaying
-      duration={2}
+      isPlaying={!pause}
+      duration={10}
       colors={[
         ["#004777", 0.33],
         ["#F7B801", 0.33],

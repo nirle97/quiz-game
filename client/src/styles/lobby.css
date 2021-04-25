@@ -1,6 +1,4 @@
 .lobby-container {
-  /* width: 100vw;
-  height: 100vh; */
   margin-top: 5%;
   display: flex;
   flex-direction: column;
@@ -16,7 +14,14 @@
 .lobby-buttons {
   margin-top: 2rem;
 }
+.lobby-buttons button {
+  margin-left: 10px;
+}
 .btn {
   font-size: 1.6rem;
   background-color: rgba(64, 224, 117, 0.315);
+}
+.login-error {
+  margin-top: 40px;
+  font-size: 25px;
 }
