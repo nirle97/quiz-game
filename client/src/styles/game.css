@@ -4,6 +4,7 @@
   justify-items: right;
   justify-content: right;
   margin-left: 15vw;
+  margin-top: 1rem;
 }
 
 .user-name {
@@ -70,4 +71,16 @@
   left: 30vw;
   width: auto;
   font-size: 25px;
+}
+.endgame-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20vh;
+}
+.endgame-text {
+  font-size: 3rem;
+}
+.start-over-button {
+  font-size: 2rem;
 }
