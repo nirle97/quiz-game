@@ -7,7 +7,9 @@ export const AppProvider = (props) => {
   const [userId, setUserId] = useState("");
   const [lives, setLives] = useState("❤️❤️❤️");
   const clicked = useRef();
+  const [key, setKey] = useState(0);
   const [playerScore, setPlayerScore] = useState(0);
+  const [isTimeRunning, setIsTimeRunning] = useState(true);
 
   return (
     <AppContext.Provider
@@ -17,6 +19,8 @@ export const AppProvider = (props) => {
         live: [lives, setLives],
         click: clicked,
         currentScore: [playerScore, setPlayerScore],
+        timerMode: [isTimeRunning, setIsTimeRunning],
+        timerKey: [key, setKey],
       }}
     >
       {props.children}

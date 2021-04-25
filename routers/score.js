@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const score = Router();
 const { player } = require("../models");
-const { Sequelize } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 
 score.get("/get-player/:id", async (req, res) => {
   const user = await player.findOne({
@@ -15,6 +15,7 @@ score.get("/get-player/:id", async (req, res) => {
 score.get("/", async (req, res) => {
   try {
     const userArray = await player.findAll({
+      where: { score: { [Op.gt]: 0 } },
       order: [["score", "DESC"]],
     });
     const users = userArray.map((user) => user.toJSON());

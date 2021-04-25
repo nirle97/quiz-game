@@ -10,9 +10,18 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 const axios = require("axios");
 
 function Game({ history }) {
-  const { name, id, live, click, currentScore } = useContext(AppContext);
+  const {
+    name,
+    id,
+    live,
+    click,
+    currentScore,
+    timerMode,
+    timerKey,
+  } = useContext(AppContext);
   const clicked = click;
-  const isTimeRunning = useRef(true);
+  const [key, setKey] = timerKey;
+  const [isTimeRunning, setIsTimeRunning] = timerMode;
   const [userName, setUserName] = name;
   const [userId, setUserId] = id;
   const [lives, setLives] = live;
@@ -65,7 +74,8 @@ function Game({ history }) {
 
   const nextQuest = () => {
     clicked.current.disabled = false;
-    isTimeRunning.current = true;
+    setIsTimeRunning(true);
+    setKey((prevKey) => prevKey + 1);
     setQuestNumber((prev) => prev + 1);
     setShowRating(false);
   };
@@ -77,12 +87,11 @@ function Game({ history }) {
         <span>Lives Left: {lives}</span>
         <span>score: {playerScore}</span>
         <div className="clock">
-          <Countdown isTimeRunning={isTimeRunning} />
+          <Countdown />
         </div>
       </div>
       <div className="question-block">
         <Question
-          isTimeRunning={isTimeRunning}
           questObj={questObj}
           finsihRound={finsihRound}
           history={history}

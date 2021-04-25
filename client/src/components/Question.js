@@ -3,15 +3,18 @@ import { AppContext } from "../AppContext";
 import "../styles/question.css";
 const axios = require("axios");
 
-function Question({ questObj, finsihRound, history, isTimeRunning }) {
+function Question({ questObj, finsihRound, history }) {
   const [optionsArray, setOptionsArray] = useState([]);
   const playerAnswer = useRef(null);
-  const { click } = useContext(AppContext);
+  const { click, timerMode } = useContext(AppContext);
   const clicked = click;
+  const [isTimeRunning, setIsTimeRunning] = timerMode;
 
   useEffect(() => {
-    if (isTimeRunning.current === false) {
-      console.log(isTimeRunning.current);
+    console.log(`${isTimeRunning}- use effect`);
+    if (isTimeRunning === false) {
+      console.log("useEffect-isTimeRunning-in-if");
+      console.log(isTimeRunning);
       submitQuest();
     }
   }, [isTimeRunning]);
@@ -52,16 +55,17 @@ function Question({ questObj, finsihRound, history, isTimeRunning }) {
   }, [questObj]);
 
   const submitQuest = () => {
-    const time = isTimeRunning.current;
     clicked.current.disabled = true;
+    if (isTimeRunning === true) {
+      if (playerAnswer.current.defaultValue === questObj.answer) {
+        finsihRound(true);
+        playerAnswer.current.labels[0].classList.add("correct-answer");
+      }
+    }
     if (
-      playerAnswer.current.defaultValue === questObj.answer &&
-      time === true
+      isTimeRunning === false ||
+      playerAnswer.current.defaultValue !== questObj.answer
     ) {
-      finsihRound(true);
-      playerAnswer.current.labels[0].classList.add("correct-answer");
-    } else {
-      console.log(isTimeRunning.current);
       const allInputs = document.querySelectorAll("label");
       allInputs.forEach((item) => {
         if (item.innerText === questObj.answer) {

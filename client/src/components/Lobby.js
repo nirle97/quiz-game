@@ -35,31 +35,6 @@ function Lobby({ history }) {
       <div className="lobby-container input-group mb-3">
         <h1 className="lobby-title">QUIZ GAME</h1>
         <input
-          // <<<<<<< HEAD
-          //           type="text"
-          //           className="form-control"
-          //           placeholder="What is your name?"
-          //           onChange={(e) => (playerName.current = e.target.value)}
-          //         ></input>
-          //         <button
-          //           className="btn btn-outline-secondary"
-          //           type="button"
-          //           onClick={() => startGame()}
-          //         >
-          //           Start Game
-          //         </button>
-          //         {loginError !== "" && <div className="login-error">{loginError}</div>}
-          //         <a className="scoreboard-title" onClick={() => history.push("/")}>
-          //           Click Here To See Other People Results!
-          //           <i className="fas fa-arrow-left" id="lobby-arrow"></i>
-          //         </a>
-          //         <button
-          //           className="btn btn-outline-secondary score-board"
-          //           onClick={() => goToScoreBoard()}
-          //         >
-          //           ScoreBoard
-          //         </button>
-          // =======
           type="text"
           className="player-input"
           placeholder="What is your name?"
@@ -67,7 +42,7 @@ function Lobby({ history }) {
         />
         <div className="lobby-buttons">
           <button
-            class="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
             type="button"
             onClick={() => startGame()}
           >
@@ -81,11 +56,6 @@ function Lobby({ history }) {
           </button>
         </div>
         {loginError !== "" && <div className="login-error">{loginError}</div>}
-        {/* <a className='scoreboard-title' onClick={() => history.push('/')}>
-          Click Here To See Other People Results!
-          <i class='fas fa-arrow-left' id='lobby-arrow'></i>
-        </a> */}
-        {/* >>>>>>> 76e13c6a7cf0fc828368577f318929220426ec6d */}
       </div>
     </>
   );
