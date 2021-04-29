@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/scoreboard.css";
 const axios = require("axios");
-
 function ScoreBoard({ history }) {
   const [playersScoreArr, setPlayersScoreArr] = useState([]);
 

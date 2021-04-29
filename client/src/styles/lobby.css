@@ -8,6 +8,8 @@
   font-size: 6rem;
 }
 .player-input {
+  display: block;
+  margin-bottom: 30px;
   font-size: 2rem;
   text-align: center;
 }
@@ -24,4 +26,8 @@
 .login-error {
   margin-top: 40px;
   font-size: 25px;
+}
+#log-in-btn {
+  display: block;
+  margin-left: 120px;
 }

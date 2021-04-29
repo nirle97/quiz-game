@@ -2,28 +2,25 @@ import React, { useRef, useContext, useState } from "react";
 import { AppContext } from "../AppContext";
 import "../styles/lobby.css";
 import Footer from "./Footer";
-
+import Cookies from "js-cookie";
+import { useHistory, Link } from "react-router-dom";
 const axios = require("axios");
 
 function Lobby({ history }) {
-  const playerName = useRef(null);
-  const { name, id, live } = useContext(AppContext);
+  const email = useRef();
+  const password = useRef();
+  const { live, loggin, currentScore, isPause } = useContext(AppContext);
+  const [pause, setPause] = isPause;
+  const [, setPlayerScore] = currentScore;
   const [, setLives] = live;
-  const [, setUserName] = name;
-  const [, setUserId] = id;
-  const [loginError, setLoginError] = useState("");
+  const [isLogged, setIsLogged] = loggin;
+  const [loginError] = useState("");
+  const [error, setError] = useState(false);
 
   async function startGame() {
-    if (!playerName.current) {
-      setLoginError("Don't Forget To Enter Your Name!");
-      return;
-    }
-    setUserName(playerName.current);
-    const playerId = await axios.post("/add-player", {
-      name: playerName.current,
-    });
-    setUserId(playerId.data.playerId.id);
     setLives("❤️❤️❤️");
+    setPlayerScore(0);
+    setPause(false);
     history.push("/game");
   }
 
@@ -31,30 +28,81 @@ function Lobby({ history }) {
     history.push("/scoreboard");
   }
 
+  const loginHandler = async () => {
+    try {
+      const res = await axios.post("/users/login", {
+        email: email.current.value,
+        password: password.current.value,
+      });
+      Cookies.set("accessToken", res.data.accessToken);
+      Cookies.set("name", res.data.name);
+      Cookies.set("id", res.data.id);
+      Cookies.set("email", res.data.email);
+      Cookies.set("score", res.data.score);
+      setIsLogged(true);
+    } catch (e) {
+      setError(true);
+    }
+  };
+
+  //const logout = () => {
+  // setIsLogged(false);
+  // setError(false)
+  // }
+
   return (
     <>
       <div className="lobby-container input-group mb-3">
         <h1 className="lobby-title">QUIZ GAME</h1>
-        <input
-          type="text"
-          className="player-input"
-          placeholder="What is your name?"
-          onChange={(e) => (playerName.current = e.target.value)}
-        />
         <div className="lobby-buttons">
-          <button
-            className="btn btn-outline-secondary"
-            type="button"
-            onClick={() => startGame()}
-          >
-            Start Game
-          </button>
-          <button
-            className="btn btn-outline-secondary score-board"
-            onClick={() => goToScoreBoard()}
-          >
-            ScoreBoard
-          </button>
+          {isLogged ? (
+            <>
+              <h2>Hello {Cookies.get("name")}</h2>
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={() => startGame()}
+              >
+                Start Game
+              </button>
+              <button
+                className="btn btn-outline-secondary score-board"
+                onClick={() => goToScoreBoard()}
+              >
+                ScoreBoard
+              </button>
+            </>
+          ) : (
+            <>
+              {error && (
+                <div className="alert alert-danger" role="alert">
+                  {"Invalid Email or Password"}
+                </div>
+              )}
+              <input
+                type="email"
+                className="player-input"
+                placeholder="E-mail"
+                ref={email}
+              />
+              <input
+                type="password"
+                className="player-input"
+                placeholder="Password"
+                ref={password}
+              />
+              <span className="sign-up-span">
+                Don't Have an Account? <Link to="/register">Sign Up</Link>
+              </span>
+              <button
+                className="btn btn-outline-secondary"
+                id="log-in-btn"
+                onClick={loginHandler}
+              >
+                Log In
+              </button>
+            </>
+          )}
         </div>
         {loginError !== "" && <div className="login-error">{loginError}</div>}
       </div>

@@ -5,10 +5,11 @@ import "../styles/question.css";
 function Question({ questObj, finsihRound, history }) {
   const [optionsArray, setOptionsArray] = useState([]);
   const playerAnswer = useRef(null);
-  const { click, timerMode, isPause } = useContext(AppContext);
+  const { click, timerMode, isPause, currentScore } = useContext(AppContext);
   const clicked = click;
   const [isTimeRunning] = timerMode;
   const [, setPause] = isPause;
+  const [, setPlayerScore] = currentScore;
 
   useEffect(() => {
     if (isTimeRunning === false) {
@@ -40,6 +41,8 @@ function Question({ questObj, finsihRound, history }) {
       questObj.option_2,
       questObj.option_3,
     ];
+    console.log(questObj.answer);
+
     const shuffledOpt = shuffleArray(optionsArr);
     setOptionsArray([...shuffledOpt]);
 
@@ -52,10 +55,12 @@ function Question({ questObj, finsihRound, history }) {
   }, [questObj]);
 
   const submitQuest = () => {
+    if (!playerAnswer.current) return;
     setPause(true);
     clicked.current.disabled = true;
     if (isTimeRunning === true) {
       if (playerAnswer.current.defaultValue === questObj.answer) {
+        setPlayerScore((prev) => prev + 100);
         finsihRound(true);
         playerAnswer.current.labels[0].classList.add("correct-answer");
       }

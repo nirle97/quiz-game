@@ -3,6 +3,7 @@ import React, { useState, createContext, useRef } from "react";
 export const AppContext = createContext();
 
 export const AppProvider = (props) => {
+  const [isLogged, setIsLogged] = useState(false);
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
   const [lives, setLives] = useState("❤️❤️❤️");
@@ -15,6 +16,7 @@ export const AppProvider = (props) => {
   return (
     <AppContext.Provider
       value={{
+        loggin: [isLogged, setIsLogged],
         name: [userName, setUserName],
         id: [userId, setUserId],
         live: [lives, setLives],
