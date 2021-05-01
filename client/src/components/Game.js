@@ -30,6 +30,7 @@ function Game({ history }) {
   useEffect(async () => {
     if (questNumber % 3 === 0) {
       const questObj = await network.get("/saved-quest");
+      questObj.data.question = questObj.data.questionTemplate.question;
       setQuestObj(questObj.data);
     } else {
       const questObj = await network.get("/gen-quest");

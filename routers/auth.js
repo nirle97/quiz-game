@@ -21,7 +21,7 @@ auth.post("/token", async (req, res) => {
       delete decoded.iat;
       delete decoded.exp;
       const accessToken = sign(decoded, process.env.JWT_SECRET, {
-        expiresIn: "15m",
+        expiresIn: "10s",
       });
       return res.status(200).send({ accessToken });
     });

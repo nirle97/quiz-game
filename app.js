@@ -9,10 +9,11 @@ const newPlayer = require("./routers/newPlayer");
 const auth = require("./routers/auth");
 app.use(express.json());
 app.use(cors());
-// app.use(express.static("./client/build"));
-// app.get('/', (request, response) => {
-//     response.sendFile((path.join(__dirname, 'client', 'bulid')))
-//   })
+
+app.use(express.static("./client/build"));
+app.get("/", (request, response) => {
+  response.sendFile(path.join(__dirname, "client", "bulid"));
+});
 
 app.use("/gen-quest", genQues);
 app.use("/score", score);

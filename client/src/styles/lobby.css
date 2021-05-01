@@ -30,4 +30,28 @@
 #log-in-btn {
   display: block;
   margin-left: 120px;
+  margin-top: 10vh;
+}
+#log-out-btn {
+  display: block;
+  text-align: center;
+  background-color: transparent;
+  font-size: 16px;
+  margin-top: 20vh;
+  margin-left: 6vw;
+}
+#log-out-btn:hover {
+  color: red;
+}
+.lobby-name {
+  text-align: center;
+  margin-bottom: 10vh;
+}
+
+.fa-sign-out-alt {
+  margin-left: 8px;
+}
+.sign-up-span {
+  margin-left: 2vw;
+  font-size: 20px;
 }

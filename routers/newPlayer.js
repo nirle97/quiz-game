@@ -21,10 +21,7 @@ newPlayer.post("/register", async (req, res) => {
       email: email,
       password: password,
     });
-    // const newPlayerId = await player.findOne({
-    //   order: [["created_at", "DESC"]],
-    // });
-    // res.send({ playerId: newPlayerId.toJSON() }).status(200);
+
     res.send({ message: "user Register Successfuly" }).status(201);
   } catch (e) {
     console.log(e);
@@ -47,7 +44,7 @@ newPlayer.post("/login", async (req, res) => {
   delete loginUser.password;
   const data = { name: loginUser.name, email, id: loginUser.id };
   const accessToken = sign(data, process.env.JWT_SECRET, {
-    expiresIn: "15m",
+    expiresIn: "10s",
   });
   const refreshToken = sign(data, process.env.JWT_SECRET, {
     expiresIn: "12h",

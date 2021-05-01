@@ -4,9 +4,11 @@ import "../styles/lobby.css";
 import Footer from "./Footer";
 import Cookies from "js-cookie";
 import { useHistory, Link } from "react-router-dom";
-const axios = require("axios");
+import network from "../network";
 
+const axios = require("axios");
 function Lobby({ history }) {
+  const location = useHistory();
   const email = useRef();
   const password = useRef();
   const { live, loggin, currentScore, isPause } = useContext(AppContext);
@@ -45,10 +47,16 @@ function Lobby({ history }) {
     }
   };
 
-  //const logout = () => {
-  // setIsLogged(false);
-  // setError(false)
-  // }
+  const logout = async () => {
+    await network.post("auth/logout");
+    setIsLogged(false);
+    setError(false);
+    Cookies.remove("accessToken");
+    Cookies.remove("name");
+    Cookies.remove("id");
+    Cookies.remove("score");
+    Cookies.remove("email");
+  };
 
   return (
     <>
@@ -57,7 +65,7 @@ function Lobby({ history }) {
         <div className="lobby-buttons">
           {isLogged ? (
             <>
-              <h2>Hello {Cookies.get("name")}</h2>
+              <h2 className="lobby-name">Hello {Cookies.get("name")}</h2>
               <button
                 className="btn btn-outline-secondary"
                 type="button"
@@ -70,6 +78,14 @@ function Lobby({ history }) {
                 onClick={() => goToScoreBoard()}
               >
                 ScoreBoard
+              </button>
+              <button
+                className="btn btn-outline-secondary"
+                id="log-out-btn"
+                onClick={logout}
+              >
+                Log Out
+                <i class="fas fa-sign-out-alt"></i>
               </button>
             </>
           ) : (
@@ -92,7 +108,7 @@ function Lobby({ history }) {
                 ref={password}
               />
               <span className="sign-up-span">
-                Don't Have an Account? <Link to="/register">Sign Up</Link>
+                Doesn't Have an Account? <Link to="/register">Sign Up</Link>
               </span>
               <button
                 className="btn btn-outline-secondary"

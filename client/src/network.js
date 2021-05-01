@@ -17,13 +17,16 @@ network.interceptors.response.use(
     const originalRequest = error.config;
     if (status === 403) {
       try {
-        const accessToken = await network.post("/auth/token", {
+        const accessToken = await axios.post("/auth/token", {
           email: Cookies.get("email"),
         });
-        Cookies.set({ accessToken: accessToken.data });
-        const data = await network(originalRequest);
+        let tempToken = accessToken.data.accessToken;
+        Cookies.set({ accessToken: tempToken });
+        originalRequest.headers.authorization = `bearer ${tempToken}`;
+        const data = await axios(originalRequest);
         return data;
       } catch (err) {
+        console.log(err);
         throw err;
       }
     } else {
