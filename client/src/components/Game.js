@@ -22,20 +22,27 @@ function Game({ history }) {
   const [, setIsTimeRunning] = timerMode;
   const [lives, setLives] = live;
   const [, setPause] = isPause;
-  const [playerScore, setPlayerScore] = currentScore;
+  const [playerScore] = currentScore;
   const [showRating, setShowRating] = useState(false);
   const [questObj, setQuestObj] = useState({});
   const [questNumber, setQuestNumber] = useState(1);
 
-  useEffect(async () => {
-    if (questNumber % 3 === 0) {
-      const questObj = await network.get("/saved-quest");
-      questObj.data.question = questObj.data.questionTemplate.question;
-      setQuestObj(questObj.data);
-    } else {
-      const questObj = await network.get("/gen-quest");
-      setQuestObj(questObj.data);
-    }
+  useEffect(() => {
+    let active = true;
+    const fetchQuest = async () => {
+      if (questNumber % 3 === 0) {
+        const questObj = await network.get("/saved-quest");
+        questObj.data.question = questObj.data.questionTemplate.question;
+        if (active) setQuestObj(questObj.data);
+      } else {
+        const questObj = await network.get("/gen-quest");
+        if (active) setQuestObj(questObj.data);
+      }
+    };
+    fetchQuest();
+    return () => {
+      active = false;
+    };
   }, [questNumber]);
 
   useEffect(() => {

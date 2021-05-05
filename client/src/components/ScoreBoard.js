@@ -4,9 +4,12 @@ const axios = require("axios");
 function ScoreBoard({ history }) {
   const [playersScoreArr, setPlayersScoreArr] = useState([]);
 
-  useEffect(async () => {
-    const scoreArray = await axios.get("/score");
-    setPlayersScoreArr(scoreArray.data);
+  useEffect(() => {
+    const fetchScore = async () => {
+      const scoreArray = await axios.get("/score");
+      setPlayersScoreArr(scoreArray.data);
+    };
+    fetchScore();
   }, []);
 
   return (
@@ -18,7 +21,7 @@ function ScoreBoard({ history }) {
 
       <div className="board-container">
         <table className="table table-hover" id="score-table">
-          <thead class="thead-dark">
+          <thead className="thead-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
@@ -29,7 +32,7 @@ function ScoreBoard({ history }) {
           <tbody>
             {playersScoreArr.map((playerScore, i) => {
               return (
-                <tr>
+                <tr key={`row - ${i}`}>
                   <th scope="row">{`${i + 1}`}</th>
                   <td>{playerScore.name}</td>
                   <td>{playerScore.score}</td>

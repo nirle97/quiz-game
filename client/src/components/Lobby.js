@@ -3,16 +3,15 @@ import { AppContext } from "../AppContext";
 import "../styles/lobby.css";
 import Footer from "./Footer";
 import Cookies from "js-cookie";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import network from "../network";
 
 const axios = require("axios");
 function Lobby({ history }) {
-  const location = useHistory();
   const email = useRef();
   const password = useRef();
   const { live, loggin, currentScore, isPause } = useContext(AppContext);
-  const [pause, setPause] = isPause;
+  const [, setPause] = isPause;
   const [, setPlayerScore] = currentScore;
   const [, setLives] = live;
   const [isLogged, setIsLogged] = loggin;

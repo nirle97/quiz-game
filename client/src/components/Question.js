@@ -41,7 +41,6 @@ function Question({ questObj, finsihRound, history }) {
       questObj.option_2,
       questObj.option_3,
     ];
-    console.log(questObj.answer);
 
     const shuffledOpt = shuffleArray(optionsArr);
     setOptionsArray([...shuffledOpt]);
