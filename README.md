@@ -53,5 +53,4 @@ Now you should have all the required tables in the sql workbench:
 5. In order to config sequelize with the tables in the workbench, fill in the data in the `example.env` file to connect your workbench.
 6. Change the `example.env` file name to `.env`.
 7. In the terminal run the server with the command `npm start`.
-   > > > > > > > 56b6a98b7eefbb80fe7d641820c917bd5d092bc2
 8. In your browser enter localhost:8080 and have fun😄
