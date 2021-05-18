@@ -5,7 +5,6 @@ installation process:
 1. Clone the code above.
 2. Open application in your text editor.
 3. Open you terminal and enter the following lines:
-   <<<<<<< HEAD
 
 - `npm i` install the server dependencies.
 - `cd client`
