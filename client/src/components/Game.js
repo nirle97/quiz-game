@@ -97,7 +97,7 @@ function Game({ history }) {
         <>
           <div className="rate-container">
             <h2 className="rate-title">
-              Please rate this question and press the "Next question" button
+              Please rate this question and press the "Next Question" button
               below
             </h2>
             <div className="rate-stars">
