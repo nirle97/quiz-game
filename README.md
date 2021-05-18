@@ -27,7 +27,7 @@ installation process:
 
 5. In order to config sequelize with the tables in the workbench, fill in the data in the `example.env` file to connect your workbench.
 6. Change the `example.env` file name to `.env`.
-7. # In the terminal run the server with the command `npm start`.
+7. In the terminal run the server with the command `npm start`.
 
 - `npm i` install the server dependencies.
 - `cd client`
