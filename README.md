@@ -14,13 +14,14 @@ installation process:
  - Make sure that the Hostname is set to `127.0.0.1` and the port is set to `3306`.
  - Create a new Schema.
  - Import the `sql` file:
-    - Click on `server` => `data import` => `import from self contained file` => choose the path of the file => choose `default target schema` => click `start import`.
+ Click on `server` => `data import` => `import from self contained file` => choose the path of the file => choose `default target schema` => click `start import`.
+ 
 Now you should have all the required tables in the sql workbench:
- a. country_quiz: Contains all the information about the countries.
- b. players: Contains all the players credentials.
- c. questions: Contains all the rated questions.
- d. questions_templates: Contains all the question templates.
- e. ratings: Connection table that links each question with its rate.
+  - country_quiz: Contains all the information about the countries.
+  - players: Contains all the players credentials.
+  - questions: Contains all the rated questions.
+  - questions_templates: Contains all the question templates.
+  - ratings: Connection table that links each question with its rate.
     
 5. In order to config sequelize with the tables in the workbench, fill in the data in the `example.env` file to connect your workbench.
 6. Change the `example.env` file name to `.env`.
