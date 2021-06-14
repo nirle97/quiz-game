@@ -30,3 +30,5 @@ e. ratings: Connection table that links each question with its rate.
  - `npm start`
  
 8. In your browser enter localhost:8080 and have fun😄
+
+<img src="./trivia.jpg" />
